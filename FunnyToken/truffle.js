@@ -10,7 +10,9 @@
  *     gas: 4500000,
  *     gasPrice: 10000000000,
  *   },
+ * ```
  */
+
 
 module.exports = {
   networks: {
