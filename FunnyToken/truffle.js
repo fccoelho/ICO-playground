@@ -13,7 +13,6 @@
  * ```
  */
 
-
 module.exports = {
   networks: {
     development: {
