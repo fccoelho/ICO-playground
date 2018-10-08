@@ -13,6 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openzeppelin-solidity": "^2.0.0-rc.2"
+    "openzeppelin-solidity": "2.0.0-rc.2"
   }
 }
