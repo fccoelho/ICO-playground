@@ -14,6 +14,11 @@
  */
 
 module.exports = {
-  // See <http://truffleframework.com/docs/advanced/configuration>
-  // to customize your Truffle configuration!
+ networks : {
+    ganache : {
+      host : 'localhost',
+      port : 8545,    // By default Ganache runs on this port.
+      network_id : "*" // network_id for ganache is 5777. However, by keeping * as value you can run this node on  any network
+    }
+  }
 };
