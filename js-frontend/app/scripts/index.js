@@ -10,7 +10,7 @@ import funnyTokenArtifact from '../../../FunnyToken/build/contracts/FunnyToken.j
 import tokenSaleArtifact from '../../../FunnyToken/build/contracts/TokenSale'
 
 // FunnyToken is our usable abstraction, which we'll use through the code below.
-const FunnyToken = contract(funnyTokenArtifact)
+    const FunnyToken = contract(funnyTokenArtifact)
 const TokenSale = contract(tokenSaleArtifact)
 
 // The following code is simple to show off interacting with your contracts.
