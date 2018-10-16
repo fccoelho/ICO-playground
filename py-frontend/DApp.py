@@ -6,13 +6,12 @@ from web3.contract import ConciseContract
 import json
 
 
-w3 = Web3()#HTTPProvider('127.0.0.1:8545'))
+w3 = Web3()  # Auto-detects connection settings
 contract_address = Web3.toChecksumAddress('0xc6c817f52322a3edf269883eb1d612cb3fa096a2')
 with open('../FunnyToken/build/contracts/FunnyToken.json') as f:
     token_artifact = json.load(f)
-    # abi = f.read()
 
-token_contract_instance = w3.eth.contract(address=contract_address, abi=token_artifact['abi'])#, ContractFactoryClass=ConciseContract)
+token_contract_instance = w3.eth.contract(address=contract_address, abi=token_artifact['abi'])
 account = w3.eth.accounts[0]
 
 app = Flask(__name__)
