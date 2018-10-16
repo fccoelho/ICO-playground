@@ -3,6 +3,8 @@
 <head>
   <title>FunnyToken - Join our Fun ICO!</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.qrcode.min.js"></script>
   <script src="./app.js"></script>
 </head>
 <body>
@@ -13,12 +15,16 @@
   <br>
   <h1>Buy FunnyToken!</h1>
   <p>Send Ether to this Address:</p>
-  <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
   <br><label for="receiver">Your Address:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-  <br><br><button id="send" onclick="App.sendCoin()">Send FunnyToken</button>
   <br><br>
   <span id="status"></span>
   <br>
   <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+  <br/><br/>
+  <h1>Contract QrCode!</h1>
+  <div id="qrcode"></div>
+  <script type="application/javascript">
+    jQuery('#qrcode').qrcode({text:"{{contract_address}}"});
+  </script>
 </body>
 </html>
