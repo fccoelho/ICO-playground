@@ -22,23 +22,36 @@
 {#</head>#}
 {% block body_content %}
     <!-- Nav Bar -->
-    <nav class="top-bar" data-topbar role="navigation">
-        <ul class="title-area">
-            <li class="name">
-                <h1><a href="#">Funny Token ICO</a></h1>
-            </li>
-            <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-        </ul>
+    <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+        <div class="title-bar-title">Menu</div>
+    </div>
 
-        <section class="top-bar-section">
-
-            <!-- Left Nav Section -->
-            <ul class="left">
-                <li><a href="#">Left Nav Button</a></li>
+    <div class="top-bar" id="responsive-menu">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">Funny Token</li>
+                <li class="has-submenu">
+                    <a href="#0">One</a>
+                    <ul class="submenu menu vertical" data-submenu>
+                        <li><a href="#0">One</a></li>
+                        <li><a href="#0">Two</a></li>
+                        <li><a href="#0">Three</a></li>
+                    </ul>
+                </li>
+                <li><a href="#0">Two</a></li>
+                <li><a href="#0">Three</a></li>
             </ul>
-        </section>
-    </nav>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li><input type="search" placeholder="Search"></li>
+                <li>
+                    <button type="button" class="button">Search</button>
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- End Nav -->
     {#<body>#}
     <h1>FunnyToken</h1>
@@ -51,7 +64,23 @@
     <div id="qrcode"></div>
 
 
-    <br><label for="receiver">Your Address:</label><input type="text" id="receiver" placeholder="{{ account }}"></input>
+    <br>
+    <form method="post" action="/">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="medium-6 cell">
+                    <label>Enter Your Address:
+                        <input type="text" id="receiver" name="address" placeholder="{{ account }}"></input>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>
+                        <button type="submit" class="success button" onclick="">Check Your balance!</button>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
     <br><br>
     <span id="status"></span>
     <br>
