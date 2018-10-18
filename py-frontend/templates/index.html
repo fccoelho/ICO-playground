@@ -1,29 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>FunnyToken - Join our Fun ICO!</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+{% extends "foundation_base.html" %}
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+{% block head %}
+    <title>FunnyToken - Join our Fun ICO!</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/js/jquery.qrcode.min.js"></script>
-</head>
-<body>
-  <h1>FunnyToken</h1>
-  <h2>The Funniest ICO Ever!</h2>
-  <h3>You have <span class="black">{{balance}}<span id="balance"></span> Funny</span></h3>
+    <script type="text/javascript" src="/static/js/jquery.qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <br>
-  <h1>Buy FunnyToken!</h1>
-  <p>Send Ether to this Address:</p>
-  <div id="qrcode"></div>
+{% endblock %}
+
+{#</head>#}
+{% block body_content %}
+    <!-- Nav Bar -->
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#">Funny Token ICO</a></h1>
+            </li>
+            <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+
+        <section class="top-bar-section">
+
+            <!-- Left Nav Section -->
+            <ul class="left">
+                <li><a href="#">Left Nav Button</a></li>
+            </ul>
+        </section>
+    </nav>
+    <!-- End Nav -->
+    {#<body>#}
+    <h1>FunnyToken</h1>
+    <h2>The Funniest ICO Ever!</h2>
+    <h3>You have <span class="black">{{ balance }}<span id="balance"></span> Funny</span></h3>
+
+    <br>
+    <h1>Buy FunnyToken!</h1>
+    <p>Send Ether to this Address:</p>
+    <div id="qrcode"></div>
 
 
-  <br><label for="receiver">Your Address:</label><input type="text" id="receiver" placeholder="{{account}}"></input>
-  <br><br>
-  <span id="status"></span>
-  <br>
-  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
-  <script type="application/javascript">
-    jQuery('#qrcode').qrcode({text:"{{contract_address}}"});
-  </script>
-</body>
-</html>
+    <br><label for="receiver">Your Address:</label><input type="text" id="receiver" placeholder="{{ account }}"></input>
+    <br><br>
+    <span id="status"></span>
+    <br>
+    <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+    <script type="application/javascript">
+        jQuery('#qrcode').qrcode({text: "{{contract_address}}"});
+    </script>
+    {#</body>#}
+    {#</html>#}
+{% endblock %}

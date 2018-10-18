@@ -13,8 +13,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
+    "dotenv": "^6.1.0",
+    "node-persist": "^3.0.1",
+    "openzeppelin-solidity": "^2.0.0-rc.2"
+=======
     "chai": "^4.2.0",
     "chai-bignumber": "^2.0.2",
     "openzeppelin-solidity": "^2.0.0-rc.3"
+>>>>>>> 2018_project
   }
 }
