@@ -1,7 +1,7 @@
-require('dotenv').config();
+const fs  = require('fs');
 var  FunnyToken = artifacts.require("FunnyToken");
 var  TokenSale = artifacts.require("TokenSale");
-    module.exports  =  function(deployer, network, accounts) {
+    module.exports  = async function(deployer, network, accounts) {
         deployer.deploy(FunnyToken, 1000000000000)
             .then(function(){
                 deployer.deploy(TokenSale, 1, accounts[0], FunnyToken.address);
@@ -9,7 +9,13 @@ var  TokenSale = artifacts.require("TokenSale");
 
         var T = FunnyToken.deployed();
         var S = TokenSale.deployed();
-        process.env.TOKEN_ADDRESS = T.address;
-        process.env.SALE_ADDRESS = S.address;
+        const storage = {'TOKEN_ADDRESS': T.address,
+                        'SALE_ADDRESS': S.address
+        };
+        const output = JSON.stringify(storage);
+        console.log(output)
+        fs.writeFileSync('.address.json',output, 'utf-8');
+
+
         // console.log(process.env.TOKEN_ADDRESS)
 };
