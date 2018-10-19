@@ -26,7 +26,7 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
 
   context('with token', async function () {
     beforeEach(async function () {
-      this.token = await FunnyToken.new(10000000);
+      this.token = await FunnyToken.new(tokenSupply);
     });
 
     it('requires a non-zero rate', async function () {
@@ -44,13 +44,13 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
     context('once deployed', async function () {
       beforeEach(async function () {
         this.crowdsale = await TokenSale.new(rate, wallet, this.token.address);
-        await this.token.transfer(this.crowdsale.address, tokenSupply);
+        // await this.token.transfer(this.crowdsale.address, tokenSupply, {gas:220000});
       });
 
       describe('accepting payments', function () {
         describe('bare payments', function () {
           it('should accept payments', async function () {
-            await this.crowdsale.send(value, { from: purchaser });
+            await this.crowdsale.send(value, { from: purchaser, gas: 220000 });
           });
 
           it('reverts on zero-valued payments', async function () {
@@ -62,18 +62,18 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
 
         describe('buyTokens', function () {
           it('should accept payments', async function () {
-            await this.crowdsale.buyTokens(investor, { value: value, from: purchaser });
+            await this.crowdsale.buyTokens(investor, { value: value, from: purchaser, gas:220000 });
           });
 
           it('reverts on zero-valued payments', async function () {
             await assertRevert(
-              this.crowdsale.buyTokens(investor, { value: 0, from: purchaser })
+              this.crowdsale.buyTokens(investor, { value: 0, from: purchaser, gas:220000 })
             );
           });
 
           it('requires a non-null beneficiary', async function () {
             await assertRevert(
-              this.crowdsale.buyTokens(ZERO_ADDRESS, { value: value, from: purchaser })
+              this.crowdsale.buyTokens(ZERO_ADDRESS, { value: value, from: purchaser, gas:220000 })
             );
           });
         });
@@ -81,7 +81,7 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
 
       describe('high-level purchase', function () {
         it('should log purchase', async function () {
-          const { logs } = await this.crowdsale.sendTransaction({ value: value, from: investor });
+          const { logs } = await this.crowdsale.sendTransaction({ value: value, from: investor, gas:220000 });
           const event = logs.find(e => e.event === 'TokensPurchased');
           should.exist(event);
           event.args.purchaser.should.equal(investor);
@@ -91,13 +91,13 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
         });
 
         it('should assign tokens to sender', async function () {
-          await this.crowdsale.sendTransaction({ value: value, from: investor });
+          await this.crowdsale.sendTransaction({ value: value, from: investor, gas:220000 });
           (await this.token.balanceOf(investor)).should.be.bignumber.equal(expectedTokenAmount);
         });
 
         it('should forward funds to wallet', async function () {
           const pre = await ethGetBalance(wallet);
-          await this.crowdsale.sendTransaction({ value, from: investor });
+          await this.crowdsale.sendTransaction({ value, from: investor, gas: 220000 });
           const post = await ethGetBalance(wallet);
           post.minus(pre).should.be.bignumber.equal(value);
         });
@@ -105,7 +105,7 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
 
       describe('low-level purchase', function () {
         it('should log purchase', async function () {
-          const { logs } = await this.crowdsale.buyTokens(investor, { value: value, from: purchaser });
+          const { logs } = await this.crowdsale.buyTokens(investor, { value: value, from: purchaser, gas:220000 });
           const event = logs.find(e => e.event === 'TokensPurchased');
           should.exist(event);
           event.args.purchaser.should.equal(purchaser);
@@ -115,13 +115,13 @@ contract('Tokensale', function ([_, investor, wallet, purchaser]) {
         });
 
         it('should assign tokens to beneficiary', async function () {
-          await this.crowdsale.buyTokens(investor, { value, from: purchaser });
+          await this.crowdsale.buyTokens(investor, { value, from: purchaser, gas:220000 });
           (await this.token.balanceOf(investor)).should.be.bignumber.equal(expectedTokenAmount);
         });
 
         it('should forward funds to wallet', async function () {
           const pre = await ethGetBalance(wallet);
-          await this.crowdsale.buyTokens(investor, { value, from: purchaser });
+          await this.crowdsale.buyTokens(investor, { value, from: purchaser , gas:220000});
           const post = await ethGetBalance(wallet);
           post.minus(pre).should.be.bignumber.equal(value);
         });
