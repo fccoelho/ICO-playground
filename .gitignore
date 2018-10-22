@@ -1,4 +1,7 @@
 /build
+
+/FunnyToken/build
+
 # Logs
 logs
 *.log
