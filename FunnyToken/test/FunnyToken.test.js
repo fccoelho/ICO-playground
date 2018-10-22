@@ -11,8 +11,8 @@ require('chai')
 
 contract('ERC20', function ([_, owner, recipient, anotherAccount]) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-  const totalsupply = new BigNumber('1e21');
-  const owners_balance = new BigNumber('1e20');
+  const totalsupply = new BigNumber('1e22');
+  const owners_balance = new BigNumber('1e22');
 
   beforeEach(async function () {
     this.token = await ERC20.new();

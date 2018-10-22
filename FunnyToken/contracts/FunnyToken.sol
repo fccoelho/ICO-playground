@@ -6,14 +6,12 @@ contract FunnyToken is ERC20 {
     string public constant name = "FunnyToken";
     string public constant symbol = "FYT";
     uint8 public constant decimals = 18;
-    uint256 private _totalSupply;// = 10000 * (10 ** uint256(decimals));
+    uint256 private totalSupp = 10000 * (10 ** uint256(decimals));
     address private owner;
 
     constructor() public {
         owner = msg.sender;
-        _totalSupply = 10000 * (10 ** uint256(decimals));
-//        uint256 val = 10000*(10**uint256(decimals));
-        _mint(owner, 100);
+        _mint(owner, totalSupp);
     }
 }
 
