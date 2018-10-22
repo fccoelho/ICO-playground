@@ -58,9 +58,9 @@ contract TokenSale {
      * @param token Address of the token being sold
      */
     constructor(uint256 rate, address wallet, IERC20 token) public {
-        require(rate > 0);
-        require(wallet != address(0));
-        require(token != address(0));
+        require(rate > 0, "Rate <= 0");
+        require(wallet != address(0), "wallet is address(0)");
+        require(token != address(0), "token address is 0");
 
         _rate = rate;
         _wallet = wallet;
@@ -148,8 +148,8 @@ contract TokenSale {
      * @param weiAmount Value in wei involved in the purchase
      */
     function _preValidatePurchase(address beneficiary, uint256 weiAmount) internal {
-        require(beneficiary != address(0));
-        require(weiAmount != 0);
+        require(beneficiary != address(0), "Beneficiary's address is 0");
+        require(weiAmount != 0, "weiAmmount is 0");
     }
 
     /**
