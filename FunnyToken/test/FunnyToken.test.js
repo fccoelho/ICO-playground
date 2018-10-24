@@ -9,10 +9,12 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('ERC20', function ([_, owner, recipient, anotherAccount]) {
+contract('ERC20', function ([owner, _, recipient, anotherAccount]) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const totalsupply = new BigNumber('1e22');
-  const owners_balance = new BigNumber('1e22');
+  // const owners_balance = new BigNumber('1e22');
+
+  // console.log('==> ',_, owner, anotherAccount, web3.eth.accounts);
 
   beforeEach(async function () {
     this.token = await ERC20.new();
@@ -33,7 +35,10 @@ contract('ERC20', function ([_, owner, recipient, anotherAccount]) {
 
     describe('when the requested account has some tokens', function () {
       it('returns the total amount of tokens', async function () {
-        (await this.token.balanceOf(owner)).should.be.bignumber.equal(0);
+        // ob = await this.token.balanceOf(owner);
+        // _b = await this.token.balanceOf(_);
+        // console.log("==> ",ob, _b);
+        (await this.token.balanceOf(owner)).should.be.bignumber.equal(totalsupply);
       });
     });
   });
@@ -56,7 +61,7 @@ contract('ERC20', function ([_, owner, recipient, anotherAccount]) {
         it('transfers the requested amount', async function () {
           await this.token.transfer(to, amount, { from: owner });
 
-          (await this.token.balanceOf(owner)).should.be.bignumber.equal(0);
+          (await this.token.balanceOf(owner)).should.be.bignumber.equal(9.9999999999999999999e+21);
 
           (await this.token.balanceOf(to)).should.be.bignumber.equal(amount);
         });
@@ -183,7 +188,7 @@ contract('ERC20', function ([_, owner, recipient, anotherAccount]) {
           it('transfers the requested amount', async function () {
             await this.token.transferFrom(owner, to, amount, { from: spender });
 
-            (await this.token.balanceOf(owner)).should.be.bignumber.equal(0);
+            (await this.token.balanceOf(owner)).should.be.bignumber.equal(9.9999999999999999999e+21);
 
             (await this.token.balanceOf(to)).should.be.bignumber.equal(amount);
           });

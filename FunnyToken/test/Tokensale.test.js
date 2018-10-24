@@ -12,9 +12,9 @@ const TokenSale = artifacts.require('TokenSale');
 const FunnyToken = artifacts.require('FunnyToken');
 
 contract('TokenSale', function ([_, investor, wallet, purchaser]) {
-  const rate = new BigNumber(1);
-  const value = 10;//ether(42);
-  const tokenSupply = new BigNumber('1e18');
+  const rate = new BigNumber(10);
+  const value = ether(2);
+  const tokenSupply = new BigNumber('1e21');
   const expectedTokenAmount = rate.mul(value);
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
@@ -44,12 +44,16 @@ contract('TokenSale', function ([_, investor, wallet, purchaser]) {
     context('once deployed', async function () {
       beforeEach(async function () {
         this.tokensale = await TokenSale.new(rate, wallet, this.token.address);
-        await this.token.transfer(this.tokensale.address, tokenSupply);
-      });
+        // supply = await this.token.totalSupply();
+        // _b = await this.token.balanceOf(web3.eth.accounts[3]);
+        // console.log(rate, wallet, supply, this.tokensale.address, _b, web3.eth.accounts);
+       await this.token.transfer(this.tokensale.address, tokenSupply);
+     });
 
       describe('accepting payments', function () {
         describe('bare payments', function () {
           it('should accept payments', async function () {
+            // console.log('==> ',value, purchaser);
             await this.tokensale.send(value, { from: purchaser, gas: 220000 });
           });
 
