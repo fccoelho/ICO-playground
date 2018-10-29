@@ -7,10 +7,10 @@ import {default as contract} from 'truffle-contract'
 
 // Import our contract artifacts and turn them into usable abstractions.
 import funnyTokenArtifact from '../../../FunnyToken/build/contracts/FunnyToken.json'
-import tokenSaleArtifact from '../../../FunnyToken/build/contracts/TokenSale'
+import tokenSaleArtifact from '../../../FunnyToken/build/contracts/TokenSale.json'
 
 // FunnyToken is our usable abstraction, which we'll use through the code below.
-    const FunnyToken = contract(funnyTokenArtifact)
+const FunnyToken = contract(funnyTokenArtifact)
 const TokenSale = contract(tokenSaleArtifact)
 
 // The following code is simple to show off interacting with your contracts.
@@ -53,7 +53,7 @@ const App = {
     refreshBalance: function () {
         const self = this
 
-        let funny
+        let funny;
         FunnyToken.deployed().then(function (instance) {
             funny = instance
             return funny.balanceOf.call(account, {from: account})
@@ -64,6 +64,10 @@ const App = {
             console.log(e)
             self.setStatus('Error getting balance; see log.')
         })
+        // console.log("Trying to do the qrcode")
+        // let sale;
+        // TokenSale.deployed().then(inst => sale=inst)
+        // jQuery('#qrcode').qrcode({text: sale.address.toString()});
     },
 
     sendCoin: function () {
@@ -88,7 +92,7 @@ const App = {
     }
 }
 
-window.App = App
+window.App = App;
 
 window.addEventListener('load', function () {
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -100,7 +104,7 @@ window.addEventListener('load', function () {
             ' If using MetaMask, see the following link.' +
             ' Feel free to delete this warning. :)' +
             ' http://truffleframework.com/tutorials/truffle-and-metamask'
-        )
+        );
         // Use Mist/MetaMask's provider
         window.web3 = new Web3(web3.currentProvider)
     } else {
@@ -113,6 +117,6 @@ window.addEventListener('load', function () {
         // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
         window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
     }
-
+    console.log("starting")
     App.start()
 })

@@ -8,10 +8,16 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'app.js'
   },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
+    },
   plugins: [
     // Copy our app's index.html to the build folder.
     new CopyWebpackPlugin([
-      { from: './app/index.html', to: 'index.html' }
+      { from: './app/index.html', to: 'index.html' },
+        {from: './app/scripts/jquery.qrcode.min.js', to: 'jquery.qrcode.min.js'}
     ])
   ],
   devtool: 'source-map',
