@@ -1,3 +1,7 @@
+/build
+
+/FunnyToken/build
+
 # Logs
 logs
 *.log
@@ -55,9 +59,10 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+FunnyToken/.env
 
 # next.js build output
 .next
 
 .idea
+build

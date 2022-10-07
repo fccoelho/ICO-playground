@@ -13,6 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openzeppelin-solidity": "1.12.0"
+    "chai": "^4.2.0",
+    "chai-bignumber": "^2.0.2",
+    "openzeppelin-solidity": "^2.0.0-rc.3",
+    "truffle-hdwallet-provider": "0.0.6"
   }
 }
